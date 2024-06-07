@@ -21,6 +21,7 @@ class BlogModel extends Blog {
       'image_url': imageUrl,
       'topics': topics,
       'updated_at': updatedAt.toIso8601String(),
+      'user_name': userName ?? '',
     };
   }
 
@@ -35,6 +36,7 @@ class BlogModel extends Blog {
       updatedAt: map['updated_at'] == null
           ? DateTime.now()
           : DateTime.parse(map['updated_at']),
+      userName: map['user_name'] == null ? '' : map['user_name'] as String,
     );
   }
 
