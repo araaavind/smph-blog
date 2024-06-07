@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:semaphore/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:semaphore/core/theme/theme.dart';
 import 'package:semaphore/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:semaphore/features/auth/presentation/pages/login_page.dart';
 import 'package:semaphore/features/blog/presentation/bloc/blog_bloc.dart';
 import 'package:semaphore/features/blog/presentation/pages/blog_page.dart';
 import 'package:semaphore/features/profile/presentation/bloc/profile_bloc.dart';
@@ -27,18 +26,18 @@ void main() async {
         create: (_) => serviceLocator<BlogBloc>(),
       ),
     ],
-    child: const MyApp(),
+    child: const SemaphoreApp(),
   ));
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class SemaphoreApp extends StatefulWidget {
+  const SemaphoreApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<SemaphoreApp> createState() => _SemaphoreAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _SemaphoreAppState extends State<SemaphoreApp> {
   @override
   void initState() {
     super.initState();
@@ -51,17 +50,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Semaphore',
       theme: AppTheme.darkThemeMode,
-      home: BlocSelector<AppUserCubit, AppUserState, bool>(
-        selector: (state) {
-          return state is AppUserLoggedIn;
-        },
-        builder: (context, isLoggedIn) {
-          if (isLoggedIn) {
-            return const BlogPage();
-          }
-          return const LoginPage();
-        },
-      ),
+      home: const BlogPage(),
     );
   }
 }

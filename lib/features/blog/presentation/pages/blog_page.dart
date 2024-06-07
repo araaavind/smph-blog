@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:semaphore/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:semaphore/core/common/widgets/loader.dart';
 import 'package:semaphore/core/theme/app_palette.dart';
 import 'package:semaphore/core/utils/show_snackbar.dart';
+import 'package:semaphore/features/auth/presentation/pages/login_page.dart';
 import 'package:semaphore/features/blog/presentation/bloc/blog_bloc.dart';
 import 'package:semaphore/features/blog/presentation/pages/add_new_blog_page.dart';
 import 'package:semaphore/features/blog/presentation/widgets/blog_card.dart';
@@ -55,16 +57,15 @@ class _BlogPageState extends State<BlogPage> {
                     ),
                     IconButton(
                       onPressed: () {
-                        Navigator.push(context, ProfilePage.route());
+                        if (context.read<AppUserCubit>().state
+                            is AppUserInitial) {
+                          Navigator.push(context, LoginPage.route());
+                        } else {
+                          Navigator.push(context, ProfilePage.route());
+                        }
                       },
                       icon: const Icon(CupertinoIcons.profile_circled),
                     ),
-                    // IconButton(
-                    //   onPressed: () {
-                    //     context.read<AuthBloc>().add(AuthLogoutEvent());
-                    //   },
-                    //   icon: const Icon(CupertinoIcons.arrow_right_circle),
-                    // )
                   ],
                   floating: true,
                 ),

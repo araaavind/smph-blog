@@ -5,7 +5,7 @@ import 'package:semaphore/core/common/widgets/loader.dart';
 import 'package:semaphore/core/theme/app_palette.dart';
 import 'package:semaphore/core/utils/show_snackbar.dart';
 import 'package:semaphore/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:semaphore/features/auth/presentation/pages/login_page.dart';
+import 'package:semaphore/features/blog/presentation/pages/blog_page.dart';
 
 class ProfilePage extends StatelessWidget {
   static route() =>
@@ -26,7 +26,7 @@ class ProfilePage extends StatelessWidget {
               } else if (state is AuthInitial) {
                 Navigator.pushAndRemoveUntil(
                   context,
-                  LoginPage.route(),
+                  BlogPage.route(),
                   (route) => false,
                 );
               }
