@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:semaphore/core/common/cubits/app_user/app_user_cubit.dart';
+import 'package:semaphore/core/common/cubits/cubit/network_cubit.dart';
 import 'package:semaphore/core/theme/theme.dart';
 import 'package:semaphore/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:semaphore/features/blog/presentation/bloc/blog_bloc.dart';
@@ -15,6 +19,9 @@ void main() async {
     providers: [
       BlocProvider(
         create: (_) => serviceLocator<AppUserCubit>(),
+      ),
+      BlocProvider(
+        create: (_) => serviceLocator<NetworkCubit>(),
       ),
       BlocProvider(
         create: (_) => serviceLocator<AuthBloc>(),
@@ -38,10 +45,24 @@ class SemaphoreApp extends StatefulWidget {
 }
 
 class _SemaphoreAppState extends State<SemaphoreApp> {
+  late StreamSubscription<InternetStatus> connectionListener;
+
   @override
   void initState() {
     super.initState();
     context.read<ProfileBloc>().add(GetCurrentUserProfileEvent());
+    connectionListener =
+        InternetConnection().onStatusChange.listen((InternetStatus status) {
+      context
+          .read<NetworkCubit>()
+          .updateNetworkStatus(status == InternetStatus.connected);
+    });
+  }
+
+  @override
+  void dispose() {
+    connectionListener.cancel();
+    super.dispose();
   }
 
   @override

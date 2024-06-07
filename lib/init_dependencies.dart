@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:semaphore/core/common/cubits/app_user/app_user_cubit.dart';
+import 'package:semaphore/core/common/cubits/cubit/network_cubit.dart';
 import 'package:semaphore/core/constants/hive_constants.dart';
 import 'package:semaphore/core/network/connection_checker.dart';
 import 'package:semaphore/core/secrets/supabase_secrets.dart';

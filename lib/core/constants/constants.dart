@@ -7,4 +7,6 @@ class Constants {
   ];
 
   static const noConnectionErrorMessage = 'Not internet connection';
+  static const networkDisconnectedMessage = 'You are offline';
+  static const networkConnectedMessage = 'You are back online';
 }
