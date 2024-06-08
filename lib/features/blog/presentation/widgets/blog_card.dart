@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:semaphore/core/common/cubits/cubit/network_cubit.dart';
@@ -72,12 +73,12 @@ class OnlineCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             gradient: LinearGradient(
               colors: [
-                Colors.black.withOpacity(0.9),
-                Colors.black.withOpacity(0.5),
+                Colors.black.withOpacity(0.8),
+                Colors.black.withOpacity(0.6),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: const [0, 0.75],
+              stops: const [0, 0.9],
             ),
           ),
           child: Column(
@@ -95,10 +96,12 @@ class OnlineCard extends StatelessWidget {
                             (e) => Padding(
                               padding: const EdgeInsets.only(right: 10.0),
                               child: Chip(
+                                padding: const EdgeInsets.all(4),
                                 label: Text(
                                   e,
                                   style: const TextStyle(
                                     color: AppPalette.whiteColor,
+                                    fontSize: 12,
                                   ),
                                 ),
                                 color: const WidgetStatePropertyAll(
@@ -110,13 +113,17 @@ class OnlineCard extends StatelessWidget {
                           .toList(),
                     ),
                   ),
-                  Text(
+                  AutoSizeText(
                     blog.title,
                     style: const TextStyle(
                       color: AppPalette.whiteColor,
-                      fontSize: 28,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
+                      height: 1.25,
                     ),
+                    minFontSize: 18,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
@@ -165,10 +172,12 @@ class OfflineCard extends StatelessWidget {
                         (e) => Padding(
                           padding: const EdgeInsets.only(right: 10.0),
                           child: Chip(
+                            padding: const EdgeInsets.all(4),
                             label: Text(
                               e,
                               style: const TextStyle(
                                 color: AppPalette.whiteColor,
+                                fontSize: 12,
                               ),
                             ),
                             color: const WidgetStatePropertyAll(
@@ -180,13 +189,17 @@ class OfflineCard extends StatelessWidget {
                       .toList(),
                 ),
               ),
-              Text(
+              AutoSizeText(
                 blog.title,
                 style: const TextStyle(
                   color: AppPalette.whiteColor,
-                  fontSize: 28,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
+                  height: 1.25,
                 ),
+                minFontSize: 18,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
