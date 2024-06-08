@@ -1,8 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:semaphore/core/common/cubits/cubit/network_cubit.dart';
 import 'package:semaphore/core/constants/constants.dart';
-import 'package:semaphore/core/theme/app_palette.dart';
 import 'package:semaphore/core/utils/calculate_reading_time.dart';
 import 'package:semaphore/core/utils/format_date.dart';
 import 'package:semaphore/core/utils/show_snackbar.dart';
@@ -39,14 +39,14 @@ class BlogViewerPage extends StatelessWidget {
                   height: 80,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: AppPalette.blogCardColor,
+                    color: Theme.of(context).cardColor,
                   ),
                   child: const Center(
                     child: Text(
                       'Images are not loaded when you are offline',
                       style: TextStyle(
                         fontSize: 14,
-                        fontWeight: FontWeight.w100,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                   ),
@@ -59,13 +59,13 @@ class BlogViewerPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    AutoSizeText(
                       blog.title,
                       style: const TextStyle(
-                        fontSize: 24,
+                        fontSize: 36,
                         fontWeight: FontWeight.w900,
-                        color: AppPalette.whiteColor,
                       ),
+                      maxLines: 4,
                     ),
                     const SizedBox(height: 20),
                     Text(
@@ -73,7 +73,6 @@ class BlogViewerPage extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
-                        color: Colors.white,
                       ),
                     ),
                     const SizedBox(height: 5),
@@ -82,7 +81,6 @@ class BlogViewerPage extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w300,
-                        color: Colors.white70,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -95,7 +93,6 @@ class BlogViewerPage extends StatelessWidget {
                       blog.content,
                       style: const TextStyle(
                         fontSize: 16,
-                        color: Colors.white,
                         height: 1.7,
                       ),
                     ),

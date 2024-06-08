@@ -164,9 +164,6 @@ class _AddBlogNewPageState extends State<AddBlogNewPage> {
                                   child: Chip(
                                     label: Text(
                                       e,
-                                      style: const TextStyle(
-                                        color: AppPalette.whiteColor,
-                                      ),
                                     ),
                                     color: selectedTopics.contains(e)
                                         ? const WidgetStatePropertyAll(

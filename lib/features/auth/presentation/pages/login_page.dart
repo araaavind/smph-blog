@@ -55,13 +55,14 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   RichText(
-                    text: const TextSpan(
+                    text: TextSpan(
                       text: 'Enter ',
                       style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
                         fontSize: 35,
                         fontWeight: FontWeight.w100,
                       ),
-                      children: [
+                      children: const [
                         TextSpan(
                           text: 'semaphore',
                           style: TextStyle(

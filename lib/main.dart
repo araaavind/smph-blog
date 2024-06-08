@@ -70,7 +70,8 @@ class _SemaphoreAppState extends State<SemaphoreApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Semaphore',
-      theme: AppTheme.darkThemeMode,
+      theme: AppTheme.lightThemeMode,
+      darkTheme: AppTheme.darkThemeMode,
       home: const BlogPage(),
     );
   }

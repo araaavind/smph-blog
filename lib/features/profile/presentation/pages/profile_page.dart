@@ -38,7 +38,9 @@ class ProfilePage extends StatelessWidget {
                       child: SizedBox(
                         height: 14,
                         width: 14,
-                        child: Loader(),
+                        child: Loader(
+                          strokeWidth: 2,
+                        ),
                       ),
                     )
                   : IconButton(

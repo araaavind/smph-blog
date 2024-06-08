@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:semaphore/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:semaphore/core/common/widgets/loader.dart';
-import 'package:semaphore/core/theme/app_palette.dart';
 import 'package:semaphore/core/utils/show_snackbar.dart';
 import 'package:semaphore/features/auth/presentation/pages/login_page.dart';
 import 'package:semaphore/features/blog/presentation/bloc/blog_bloc.dart';
@@ -79,7 +78,6 @@ class _BlogPageState extends State<BlogPage> {
                     (context, index) {
                       return BlogCard(
                         blog: state.blogs[index],
-                        color: AppPalette.blogCardColor,
                       );
                     },
                     childCount: state.blogs.length,

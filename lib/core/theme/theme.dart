@@ -11,22 +11,64 @@ class AppTheme {
       );
 
   static final darkThemeMode = ThemeData.dark().copyWith(
-      scaffoldBackgroundColor: AppPalette.backgroundColor,
-      appBarTheme: const AppBarTheme(
-        backgroundColor: AppPalette.backgroundColor,
-        scrolledUnderElevation: 0,
+    scaffoldBackgroundColor: AppPalette.backgroundColorDark,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppPalette.backgroundColorDark,
+      scrolledUnderElevation: 0,
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      contentPadding: const EdgeInsets.all(18),
+      border: _border(),
+      enabledBorder: _border(),
+      focusedBorder: _border(AppPalette.gradient2Dark),
+      errorBorder: _border(AppPalette.errorColorDark),
+    ),
+    chipTheme: const ChipThemeData(
+      color: WidgetStatePropertyAll(
+        AppPalette.backgroundColorDark,
       ),
-      inputDecorationTheme: InputDecorationTheme(
-        contentPadding: const EdgeInsets.all(18),
-        border: _border(),
-        enabledBorder: _border(),
-        focusedBorder: _border(AppPalette.gradient2),
-        errorBorder: _border(AppPalette.errorColor),
+      labelStyle: TextStyle(
+        color: Colors.black,
       ),
-      chipTheme: const ChipThemeData(
-        color: WidgetStatePropertyAll(
-          AppPalette.backgroundColor,
-        ),
-        side: BorderSide.none,
-      ));
+      side: BorderSide.none,
+    ),
+    cardColor: AppPalette.blogCardColorDark,
+    extensions: [
+      CardOverlayGradientColors(
+        overlayGradientOne: Colors.black.withOpacity(0.8),
+        overlayGradientTwo: Colors.black.withOpacity(0.5),
+      )
+    ],
+  );
+
+  static final lightThemeMode = ThemeData.light().copyWith(
+    scaffoldBackgroundColor: AppPalette.backgroundColor,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppPalette.backgroundColor,
+      scrolledUnderElevation: 0,
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      contentPadding: const EdgeInsets.all(18),
+      border: _border(),
+      enabledBorder: _border(),
+      focusedBorder: _border(AppPalette.gradient2),
+      errorBorder: _border(AppPalette.errorColor),
+    ),
+    chipTheme: const ChipThemeData(
+      color: WidgetStatePropertyAll(
+        AppPalette.backgroundColor,
+      ),
+      labelStyle: TextStyle(
+        color: Colors.black,
+      ),
+      side: BorderSide.none,
+    ),
+    cardColor: AppPalette.blogCardColor,
+    extensions: [
+      CardOverlayGradientColors(
+        overlayGradientOne: Colors.white,
+        overlayGradientTwo: Colors.white.withOpacity(0.8),
+      )
+    ],
+  );
 }

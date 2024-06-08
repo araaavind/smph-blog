@@ -9,12 +9,10 @@ import 'package:semaphore/features/blog/presentation/pages/blog_viewer_page.dart
 
 class BlogCard extends StatelessWidget {
   final Blog blog;
-  final Color color;
 
   const BlogCard({
     super.key,
     required this.blog,
-    required this.color,
   });
 
   @override
@@ -26,9 +24,15 @@ class BlogCard extends StatelessWidget {
       child: BlocBuilder<NetworkCubit, NetworkState>(
         builder: (context, state) {
           if (state is NetworkConnected) {
-            return OnlineCard(blog: blog, color: color);
+            return OnlineCard(
+              blog: blog,
+              color: Theme.of(context).cardColor,
+            );
           }
-          return OfflineCard(blog: blog, color: color);
+          return OfflineCard(
+            blog: blog,
+            color: Theme.of(context).cardColor,
+          );
         },
       ),
     );
@@ -71,14 +75,19 @@ class OnlineCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(8),
+            border: Border.all(),
             gradient: LinearGradient(
               colors: [
-                Colors.black.withOpacity(0.8),
-                Colors.black.withOpacity(0.6),
+                Theme.of(context)
+                    .extension<CardOverlayGradientColors>()!
+                    .overlayGradientOne!,
+                Theme.of(context)
+                    .extension<CardOverlayGradientColors>()!
+                    .overlayGradientTwo!,
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: const [0, 0.9],
+              stops: const [0, 0.75],
             ),
           ),
           child: Column(
@@ -100,7 +109,6 @@ class OnlineCard extends StatelessWidget {
                                 label: Text(
                                   e,
                                   style: const TextStyle(
-                                    color: AppPalette.whiteColor,
                                     fontSize: 12,
                                   ),
                                 ),
@@ -116,7 +124,6 @@ class OnlineCard extends StatelessWidget {
                   AutoSizeText(
                     blog.title,
                     style: const TextStyle(
-                      color: AppPalette.whiteColor,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       height: 1.25,
@@ -176,7 +183,6 @@ class OfflineCard extends StatelessWidget {
                             label: Text(
                               e,
                               style: const TextStyle(
-                                color: AppPalette.whiteColor,
                                 fontSize: 12,
                               ),
                             ),
@@ -192,7 +198,6 @@ class OfflineCard extends StatelessWidget {
               AutoSizeText(
                 blog.title,
                 style: const TextStyle(
-                  color: AppPalette.whiteColor,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   height: 1.25,

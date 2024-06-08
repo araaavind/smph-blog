@@ -55,13 +55,14 @@ class _SignupPageState extends State<SignupPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   RichText(
-                    text: const TextSpan(
+                    text: TextSpan(
                       text: 'Join ',
                       style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
                         fontSize: 35,
                         fontWeight: FontWeight.w100,
                       ),
-                      children: [
+                      children: const [
                         TextSpan(
                           text: 'semaphore',
                           style: TextStyle(
@@ -124,7 +125,7 @@ class _SignupPageState extends State<SignupPage> {
                                 .titleMedium
                                 ?.copyWith(
                                   color: AppPalette.gradient2,
-                                  // fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.bold,
                                 ),
                           ),
                         ],
