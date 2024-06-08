@@ -16,7 +16,12 @@ class BlogLocalDatasourceImpl implements BlogLocalDatasource {
     List<BlogModel> blogs = [];
     box.read(() {
       for (int i = 0; i < box.length; i++) {
-        blogs.add(BlogModel.fromJson(box.get(i.toString())));
+        final blogObject = box.get(i.toString());
+        blogs.add(
+          BlogModel.fromJson(blogObject).copyWith(
+            userName: blogObject['user_name'],
+          ),
+        );
       }
     });
     return blogs;
@@ -27,7 +32,9 @@ class BlogLocalDatasourceImpl implements BlogLocalDatasource {
     box.clear();
     box.write(() {
       for (int i = 0; i < blogs.length; i++) {
-        box.put(i.toString(), blogs[i].toJson());
+        final blogObject = blogs[i].toJson();
+        blogObject['user_name'] = blogs[i].userName;
+        box.put(i.toString(), blogObject);
       }
     });
   }

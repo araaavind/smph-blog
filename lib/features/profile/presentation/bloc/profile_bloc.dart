@@ -19,7 +19,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         _appUserCubit = appUserCubit,
         super(ProfileInitial()) {
     on<ProfileEvent>((event, emit) async {
-      print(event);
       final res = await _getCurrentUserProfileData(NoParams());
 
       res.fold(
