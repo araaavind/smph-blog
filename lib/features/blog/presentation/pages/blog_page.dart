@@ -42,32 +42,37 @@ class _BlogPageState extends State<BlogPage> {
           if (state is BlogGetAllSuccess) {
             return CustomScrollView(
               slivers: [
-                SliverAppBar(
-                  expandedHeight: 60,
-                  title: const Text(
-                    'Semaphore',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                  ),
-                  actions: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.push(context, AddBlogNewPage.route());
-                      },
-                      icon: const Icon(CupertinoIcons.add_circled),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        if (context.read<AppUserCubit>().state
-                            is AppUserInitial) {
-                          Navigator.push(context, LoginPage.route());
-                        } else {
-                          Navigator.push(context, ProfilePage.route());
-                        }
-                      },
-                      icon: const Icon(CupertinoIcons.profile_circled),
-                    ),
-                  ],
-                  floating: true,
+                BlocBuilder<AppUserCubit, AppUserState>(
+                  builder: (context, state) {
+                    return SliverAppBar(
+                      expandedHeight: 60,
+                      title: const Text(
+                        'Semaphore',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 24),
+                      ),
+                      actions: [
+                        state is AppUserLoggedIn
+                            ? IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context, AddBlogNewPage.route());
+                                },
+                                icon: const Icon(CupertinoIcons.add_circled),
+                              )
+                            : const SizedBox.shrink(),
+                        IconButton(
+                          onPressed: () {
+                            state is AppUserInitial
+                                ? Navigator.push(context, LoginPage.route())
+                                : Navigator.push(context, ProfilePage.route());
+                          },
+                          icon: const Icon(CupertinoIcons.profile_circled),
+                        ),
+                      ],
+                      floating: true,
+                    );
+                  },
                 ),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
