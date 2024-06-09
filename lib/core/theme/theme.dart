@@ -17,6 +17,9 @@ class AppTheme {
       foregroundColor: Colors.white,
       scrolledUnderElevation: 0,
     ),
+    drawerTheme: const DrawerThemeData(
+      backgroundColor: Color.fromRGBO(10, 10, 10, 1),
+    ),
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.all(18),
       border: _border(),
@@ -48,6 +51,9 @@ class AppTheme {
       backgroundColor: AppPalette.backgroundColor,
       foregroundColor: Colors.black,
       scrolledUnderElevation: 0,
+    ),
+    drawerTheme: const DrawerThemeData(
+      backgroundColor: Color.fromRGBO(244, 244, 244, 1),
     ),
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.all(18),

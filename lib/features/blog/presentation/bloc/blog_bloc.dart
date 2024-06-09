@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:semaphore/core/usecase/usecase.dart';
 import 'package:semaphore/features/blog/domain/entities/blog.dart';
 import 'package:semaphore/features/blog/domain/usecases/get_all_blogs.dart';
@@ -51,7 +52,16 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
 
     res.fold(
       (failure) => emit(BlogFailure(failure.message)),
-      (blogs) => emit(BlogGetAllSuccess(blogs)),
+      (blogs) {
+        if (event.topic != null) {
+          blogs = blogs.filter(
+            (blog) {
+              return blog.topics.contains(event.topic);
+            },
+          ).toList();
+        }
+        emit(BlogGetAllSuccess(blogs));
+      },
     );
   }
 }

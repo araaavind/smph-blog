@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:semaphore/features/blog/presentation/cubit/wall_cubit.dart';
 
 class BlogPageSliverAppBarBottom extends StatelessWidget
     implements PreferredSizeWidget {
@@ -13,37 +15,46 @@ class BlogPageSliverAppBarBottom extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false, // this will hide Drawer hamburger icon
+      backgroundColor: Theme.of(context).primaryColor.withOpacity(0.5),
       title: GestureDetector(
         onTap: () {
           Scaffold.of(context).openDrawer();
         },
-        child: const Row(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 2),
               child: Icon(
                 Icons.menu,
-                size: 22,
+                size: 20,
                 weight: 1,
               ),
             ),
-            SizedBox(width: 8),
-            Text(
-              'All stories',
-              style: TextStyle(
-                fontSize: 20,
-              ),
+            const SizedBox(width: 8),
+            BlocBuilder<WallCubit, WallState>(
+              builder: (context, state) {
+                return Text(
+                  state is WallInitial
+                      ? 'All Stories'
+                      : (state as WallChanged).wall,
+                  style: const TextStyle(
+                    fontSize: 18,
+                  ),
+                );
+              },
             ),
           ],
         ),
       ),
       actions: [
         IconButton(
+          iconSize: 22,
           onPressed: () {},
           icon: const Icon(Icons.search),
         ),
         IconButton(
+          iconSize: 22,
           onPressed: () {},
           icon: const Icon(Icons.filter_list),
         ),

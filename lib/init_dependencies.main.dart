@@ -133,5 +133,9 @@ void _initBlog() {
         uploadBlog: serviceLocator(),
         getAllBlog: serviceLocator(),
       ),
+    )
+    // Register wall cubit
+    ..registerLazySingleton(
+      () => WallCubit(),
     );
 }

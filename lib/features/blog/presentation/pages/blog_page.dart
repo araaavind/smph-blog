@@ -24,38 +24,56 @@ class _BlogPageState extends State<BlogPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocConsumer<BlogBloc, BlogState>(
-        listener: (context, state) {
-          if (state is BlogFailure) {
-            showSnackbar(context, state.error);
-          }
-        },
-        builder: (context, state) {
-          if (state is BlogLoading) {
-            return const Loader();
-          }
-          if (state is BlogGetAllSuccess) {
-            return CustomScrollView(
-              slivers: [
-                const BlogPageSliverAppBar(),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      return BlogCard(
-                        blog: state.blogs[index],
-                      );
-                    },
-                    childCount: state.blogs.length,
-                  ),
-                )
-              ],
-            );
-          }
-          return const SizedBox();
-        },
+    return const Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          BlogPageSliverAppBar(),
+          BlogPageSliverList(),
+        ],
       ),
-      drawer: const BlogPageDrawer(),
+      drawer: BlogPageDrawer(),
+    );
+  }
+}
+
+class BlogPageSliverList extends StatelessWidget {
+  const BlogPageSliverList({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<BlogBloc, BlogState>(
+      listener: (context, state) {
+        if (state is BlogFailure) {
+          showSnackbar(context, state.error);
+        }
+        if (state is BlogInitial || state is BlogUploadSuccess) {
+          showSnackbar(context, 'Something went wrong. Please restart the app');
+        }
+      },
+      builder: (context, state) {
+        if (state is BlogLoading) {
+          return const SliverFillRemaining(
+            child: Loader(),
+          );
+        }
+        if (state is BlogGetAllSuccess) {
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return BlogCard(
+                  blog: state.blogs[index],
+                );
+              },
+              childCount: state.blogs.length,
+            ),
+          );
+        }
+        return const SliverToBoxAdapter(
+          child: SizedBox.shrink(),
+        );
+      },
     );
   }
 }

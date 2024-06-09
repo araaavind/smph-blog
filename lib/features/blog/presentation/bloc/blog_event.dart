@@ -19,4 +19,8 @@ final class BlogUploadEvent extends BlogEvent {
   });
 }
 
-final class BlogGetAllBlogsEvent extends BlogEvent {}
+final class BlogGetAllBlogsEvent extends BlogEvent {
+  final String? topic;
+
+  BlogGetAllBlogsEvent({this.topic});
+}

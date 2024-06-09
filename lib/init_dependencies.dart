@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:semaphore/core/common/cubits/app_user/app_user_cubit.dart';
-import 'package:semaphore/core/common/cubits/cubit/network_cubit.dart';
+import 'package:semaphore/core/common/cubits/network/network_cubit.dart';
 import 'package:semaphore/core/constants/hive_constants.dart';
 import 'package:semaphore/core/network/connection_checker.dart';
 import 'package:semaphore/core/secrets/supabase_secrets.dart';
@@ -21,6 +21,7 @@ import 'package:semaphore/features/blog/domain/repositories/blog_repository.dart
 import 'package:semaphore/features/blog/domain/usecases/get_all_blogs.dart';
 import 'package:semaphore/features/blog/domain/usecases/upload_blog.dart';
 import 'package:semaphore/features/blog/presentation/bloc/blog_bloc.dart';
+import 'package:semaphore/features/blog/presentation/cubit/wall_cubit.dart';
 import 'package:semaphore/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:semaphore/features/profile/data/repositories/profile_repository_impl.dart';
 import 'package:semaphore/features/profile/domain/repositories/profile_repository.dart';
