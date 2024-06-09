@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:semaphore/core/error/exceptions.dart';
 import 'package:semaphore/features/auth/data/models/user_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -44,7 +45,11 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     } on AuthException catch (e) {
       throw ServerException(e.message);
     } catch (e) {
-      throw ServerException(e.toString());
+      if (kDebugMode) {
+        debugPrint(e.toString());
+      }
+      throw const ServerException(
+          'Something went wrong. We\'re checking the issue.');
     }
   }
 
@@ -69,7 +74,11 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     } on AuthException catch (e) {
       throw ServerException(e.message);
     } catch (e) {
-      throw ServerException(e.toString());
+      if (kDebugMode) {
+        debugPrint(e.toString());
+      }
+      throw const ServerException(
+          'Something went wrong. We\'re checking the issue.');
     }
   }
 
@@ -80,7 +89,11 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     } on AuthException catch (e) {
       throw ServerException(e.message);
     } catch (e) {
-      throw ServerException(e.toString());
+      if (kDebugMode) {
+        debugPrint(e.toString());
+      }
+      throw const ServerException(
+          'Something went wrong. We\'re checking the issue.');
     }
   }
 }

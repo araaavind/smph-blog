@@ -56,7 +56,7 @@ class BlogRepositoryImpl implements BlogRepository {
 
       return right(uploadedBlog);
     } on ServerException catch (e) {
-      return left(Failure(e.toString()));
+      return left(Failure(e.message));
     }
   }
 
@@ -73,7 +73,7 @@ class BlogRepositoryImpl implements BlogRepository {
 
       return right(blogs);
     } on ServerException catch (e) {
-      return Left(Failure(e.toString()));
+      return Left(Failure(e.message));
     }
   }
 }

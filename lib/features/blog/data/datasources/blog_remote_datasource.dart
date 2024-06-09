@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:semaphore/core/constants/supabase_constants.dart';
 import 'package:semaphore/core/error/exceptions.dart';
 import 'package:semaphore/features/blog/data/models/blog_model.dart';
@@ -30,10 +31,17 @@ class BlogRemoteDatasourceImpl implements BlogRemoteDatasource {
           .select();
 
       return BlogModel.fromJson(blogData.first);
-    } on PostgrestException catch (e) {
-      throw ServerException(e.message);
+    } on PostgrestException catch (_) {
+      throw const ServerException(
+          'Something went wrong. We\'re checking the issue.');
+    } on AuthException catch (_) {
+      throw const ServerException('You are note authorized to upload blogs');
     } catch (e) {
-      throw ServerException(e.toString());
+      if (kDebugMode) {
+        debugPrint(e.toString());
+      }
+      throw const ServerException(
+          'Something went wrong. We\'re checking the issue.');
     }
   }
 
@@ -56,7 +64,11 @@ class BlogRemoteDatasourceImpl implements BlogRemoteDatasource {
     } on StorageException catch (e) {
       throw ServerException(e.message);
     } catch (e) {
-      throw ServerException(e.toString());
+      if (kDebugMode) {
+        debugPrint(e.toString());
+      }
+      throw const ServerException(
+          'Something went wrong. We\'re checking the issue.');
     }
   }
 
@@ -77,7 +89,11 @@ class BlogRemoteDatasourceImpl implements BlogRemoteDatasource {
     } on PostgrestException catch (e) {
       throw ServerException(e.message);
     } catch (e) {
-      throw ServerException(e.toString());
+      if (kDebugMode) {
+        debugPrint(e.toString());
+      }
+      throw const ServerException(
+          'Something went wrong. We\'re checking the issue.');
     }
   }
 }

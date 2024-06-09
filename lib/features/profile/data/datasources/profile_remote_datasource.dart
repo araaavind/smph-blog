@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:semaphore/core/constants/supabase_constants.dart';
 import 'package:semaphore/core/error/exceptions.dart';
 import 'package:semaphore/features/profile/data/models/profile_model.dart';
@@ -31,7 +32,11 @@ class ProfileRemoteDatasourceImpl implements ProfileRemoteDatasource {
       }
       return null;
     } catch (e) {
-      throw ServerException(e.toString());
+      if (kDebugMode) {
+        debugPrint(e.toString());
+      }
+      throw const ServerException(
+          'Something went wrong. We\'re checking the issue.');
     }
   }
 }
