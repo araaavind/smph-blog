@@ -48,9 +48,6 @@ class BlogPageSliverList extends StatelessWidget {
         if (state is BlogFailure) {
           showSnackbar(context, state.error);
         }
-        if (state is BlogInitial || state is BlogUploadSuccess) {
-          showSnackbar(context, 'Something went wrong. Please restart the app');
-        }
       },
       builder: (context, state) {
         if (state is BlogLoading) {
