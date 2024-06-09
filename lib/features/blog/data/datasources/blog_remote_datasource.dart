@@ -65,7 +65,8 @@ class BlogRemoteDatasourceImpl implements BlogRemoteDatasource {
     try {
       final blogs = await supabaseClient
           .from(SupabaseConstants.blogsTableName)
-          .select('*, ${SupabaseConstants.profilesTableName}(name)');
+          .select('*, ${SupabaseConstants.profilesTableName}(name)')
+          .order('updated_at', ascending: false);
       return blogs
           .map(
             (blog) => BlogModel.fromJson(blog).copyWith(
