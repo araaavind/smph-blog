@@ -14,6 +14,7 @@ class AppTheme {
     scaffoldBackgroundColor: AppPalette.backgroundColorDark,
     appBarTheme: const AppBarTheme(
       backgroundColor: AppPalette.backgroundColorDark,
+      foregroundColor: Colors.white,
       scrolledUnderElevation: 0,
     ),
     inputDecorationTheme: InputDecorationTheme(
@@ -45,6 +46,7 @@ class AppTheme {
     scaffoldBackgroundColor: AppPalette.backgroundColor,
     appBarTheme: const AppBarTheme(
       backgroundColor: AppPalette.backgroundColor,
+      foregroundColor: Colors.black,
       scrolledUnderElevation: 0,
     ),
     inputDecorationTheme: InputDecorationTheme(

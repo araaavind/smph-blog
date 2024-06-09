@@ -1,14 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:semaphore/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:semaphore/core/common/widgets/loader.dart';
 import 'package:semaphore/core/utils/show_snackbar.dart';
-import 'package:semaphore/features/auth/presentation/pages/login_page.dart';
 import 'package:semaphore/features/blog/presentation/bloc/blog_bloc.dart';
-import 'package:semaphore/features/blog/presentation/pages/add_new_blog_page.dart';
 import 'package:semaphore/features/blog/presentation/widgets/blog_card.dart';
-import 'package:semaphore/features/profile/presentation/pages/profile_page.dart';
+import 'package:semaphore/features/blog/presentation/widgets/blog_page_drawer.dart';
+import 'package:semaphore/features/blog/presentation/widgets/blog_page_sliver_app_bar.dart';
 
 class BlogPage extends StatefulWidget {
   static route() => MaterialPageRoute(builder: (context) => const BlogPage());
@@ -41,38 +38,7 @@ class _BlogPageState extends State<BlogPage> {
           if (state is BlogGetAllSuccess) {
             return CustomScrollView(
               slivers: [
-                BlocBuilder<AppUserCubit, AppUserState>(
-                  builder: (context, state) {
-                    return SliverAppBar(
-                      expandedHeight: 60,
-                      title: const Text(
-                        'Semaphore',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 24),
-                      ),
-                      actions: [
-                        state is AppUserLoggedIn
-                            ? IconButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context, AddBlogNewPage.route());
-                                },
-                                icon: const Icon(CupertinoIcons.add_circled),
-                              )
-                            : const SizedBox.shrink(),
-                        IconButton(
-                          onPressed: () {
-                            state is AppUserInitial
-                                ? Navigator.push(context, LoginPage.route())
-                                : Navigator.push(context, ProfilePage.route());
-                          },
-                          icon: const Icon(CupertinoIcons.profile_circled),
-                        ),
-                      ],
-                      floating: true,
-                    );
-                  },
-                ),
+                const BlogPageSliverAppBar(),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
@@ -89,6 +55,7 @@ class _BlogPageState extends State<BlogPage> {
           return const SizedBox();
         },
       ),
+      drawer: const BlogPageDrawer(),
     );
   }
 }
